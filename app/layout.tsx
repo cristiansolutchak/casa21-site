@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Schibsted_Grotesk, DM_Sans } from "next/font/google";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import Footer from "@/components/layout/Footer";
@@ -57,6 +58,11 @@ export default async function RootLayout({
       className={`${schibstedGrotesk.variable} ${dmSans.variable}`}
     >
       <body>
+        <Script
+          src="https://analytics.seven.sx/script.js"
+          data-website-id="5719508b-5033-4664-81af-2bb007b59281"
+          strategy="afterInteractive"
+        />
         <LanguageProvider>
           {children}
           <Footer newsletters={newsletters} />
