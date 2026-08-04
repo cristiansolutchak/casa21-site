@@ -14,6 +14,27 @@ const WIDE_BP = 1500;
 const GAP_DESKTOP = 24;
 const GAP_MOBILE = 16;
 
+const MANUAL_EVENTS: ApiEventItem[] = [
+  {
+    category: "Casa21",
+    title: "Rust-SP Meetup",
+    description:
+      "Encontro da comunidade Rust-SP na Casa21, com talks, discussões sobre a linguagem, novidades do ecossistema e muito networking.",
+    location: "Av. Nhandu 848 - Planalto Paulista",
+    start_date: "2026-08-08T09:00:00-03:00",
+    image: "/events/gallery/rust-sp-meetup.png",
+    href: "https://luma.com/41oiyhtk",
+  },
+];
+
+function sortByDate(items: ApiEventItem[]): ApiEventItem[] {
+  return [...items].sort((a, b) => {
+    if (!a.start_date) return 1;
+    if (!b.start_date) return -1;
+    return new Date(a.start_date).getTime() - new Date(b.start_date).getTime();
+  });
+}
+
 function formatDate(isoDate: string | null, lang: "en" | "br", fallback: string): string {
   if (!isoDate) return fallback;
   const locale = lang === "br" ? "pt-BR" : "en-US";
@@ -85,8 +106,8 @@ export default function EventsSection() {
   useEffect(() => {
     fetch("/api/events?type=upcoming&limit=20")
       .then((r) => r.json())
-      .then((data) => { setApiItems(data.items ?? []); })
-      .catch(() => { setApiItems([]); });
+      .then((data) => { setApiItems(sortByDate([...(data.items ?? []), ...MANUAL_EVENTS])); })
+      .catch(() => { setApiItems(sortByDate(MANUAL_EVENTS)); });
   }, []);
 
   const isLoading = apiItems === null;
