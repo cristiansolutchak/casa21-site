@@ -14,18 +14,7 @@ const WIDE_BP = 1500;
 const GAP_DESKTOP = 24;
 const GAP_MOBILE = 16;
 
-const MANUAL_EVENTS: ApiEventItem[] = [
-  {
-    category: "Casa21",
-    title: "Rust-SP Meetup",
-    description:
-      "Encontro da comunidade Rust-SP na Casa21, com talks, discussões sobre a linguagem, novidades do ecossistema e muito networking.",
-    location: "Av. Nhandu 848 - Planalto Paulista",
-    start_date: "2026-08-08T09:00:00-03:00",
-    image: "/events/gallery/rust-sp-meetup.png",
-    href: "https://luma.com/41oiyhtk",
-  },
-];
+const MANUAL_EVENTS: ApiEventItem[] = [];
 
 function sortByDate(items: ApiEventItem[]): ApiEventItem[] {
   return [...items].sort((a, b) => {
